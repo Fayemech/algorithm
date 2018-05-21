@@ -1,3 +1,4 @@
+nonhash
 public:
     bool isIsomorphic(string s, string t) {
         if(replacestrtonumber(s)!=replacestrtonumber(t))    return false;
@@ -14,4 +15,22 @@ public:
             s[i]=a[b];
         }
             return s;
+    };
+
+
+
+
+hash
+public:
+    bool isIsomorphic(string s, string t) {
+        unordered_map<char,char>ori,relf;
+        for(int i=0;i<s.length();i++){
+            if(ori.find(s[i])==end(ori)&&relf.find(t[i])==end(relf)){
+                ori[s[i]]=t[i];
+                relf[t[i]]=s[i];
+            }
+                else if(ori[s[i]]!=t[i])   return false;
+            
+        }
+        return true;
     };
