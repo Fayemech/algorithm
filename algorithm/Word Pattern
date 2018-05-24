@@ -1,0 +1,20 @@
+public:
+    bool wordPattern(string pattern, string str) {
+        unordered_map<char,int> pta;
+        unordered_map<string,int> sta;
+        istringstream stream(str);
+        int i=0;
+        for(string word;stream>>word;i++){
+            auto p_res=pta.insert({pattern[i],pta.size()});
+            auto s_res=sta.insert({word,sta.size()});
+            if(p_res.first->second!=s_res.first->second){
+                return false;
+            }
+        }
+        return i==pattern.size();
+    };
+    
+    
+    
+    
+    
