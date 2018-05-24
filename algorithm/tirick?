@@ -1,0 +1,39 @@
+take 1or2or3 ,n stone;  u first, who win;   
+
+4means u lose;
+so
+trick
+
+public:
+    bool canWinNim(int n) {
+         return n%4!=0;
+         };
+
+
+
+
+ 
+
+
+
+
+
+DP way;
+
+
+public:
+    bool canWinNim(int n) {
+        int * p=new(nothrow) int [n];
+        if(p!=nullptr){
+            p[0]=true;
+            p[1]=true;
+            p[2]=true;
+            p[3]=false;
+            for(int i=3;i<n;i++){
+                p[i]=!(p[i-1]&&p[i-2]&&p[i-3]);
+            }
+        }
+        int res=p[n-1];
+        delete[]p;
+        return res;
+    };
