@@ -1,0 +1,27 @@
+public:
+    int compress(vector<char>& chars) {
+        int count=0,index=0;
+        char prev=0;
+        for(auto ch:chars){
+            if(prev==0||prev==ch){
+                ++count;
+            }
+            else{
+                chars[index++]=prev;
+                if(count>1){
+                    for(auto cc:to_string(count)){
+                        chars[index++]=cc;
+                    }
+                }
+                count=1;
+            }
+            prev=ch;
+        }
+        chars[index++]=prev;
+        if(count>1){
+            for(auto cc:to_string(count)){
+                chars[index++]=cc;
+            }
+        }
+        return index;
+    };
