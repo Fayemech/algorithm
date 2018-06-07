@@ -1,4 +1,4 @@
-solution1;
+solution1:any tree;
 public:
     bool findTarget(TreeNode* root, int k) {
         unordered_set<int> s;
@@ -12,4 +12,22 @@ public:
     };
 
 
-solution2
+solution2: only bst tree;
+public:
+    bool findTarget(TreeNode* root, int k) {
+        vector<int> order;
+        inorder(root,order);
+        for(int i=0,j=order.size()-1;i<j;){
+            if(order[i]+order[j]==k){
+                return true;
+            }
+            (order[i]+order[j])>k?j--:i++;
+        }
+        return false;
+    }
+    void inorder(TreeNode* root, vector<int>& order){
+        if(root==NULL)  return;
+        inorder(root->left,order);
+        order.push_back(root->val);
+        inorder(root->right,order);
+    };
