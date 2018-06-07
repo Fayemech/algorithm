@@ -31,3 +31,17 @@ public:
         order.push_back(root->val);
         inorder(root->right,order);
     };
+
+solution3:
+public:
+    bool findTarget(TreeNode* root, int k) {
+        return dfs(root,root,k);
+    }
+    bool dfs(TreeNode* root, TreeNode* cur, int k){
+        if(cur==NULL)  return false;
+        return serch(root,cur,k-cur->val)||dfs(root,cur->left,k)||dfs(root,cur->right,k);
+    }
+    bool serch(TreeNode* root, TreeNode* cur, int s){
+        if(root==NULL)   return false;
+        return (root->val==s)&&(root!=cur)||(root->val<s)&&serch(root->right,cur,s)||(root->val>s)&&serch(root->left,cur,s);
+    };
