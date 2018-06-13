@@ -1,0 +1,60 @@
+solution 1
+class Solution {
+public:
+    int rotatedDigits(int N) {
+        int f[]={1,1,2,0,0,2,2,0,1,2};
+        int res=0;
+        for(int i=1;i<=N;i++){
+            int t=i;
+            int s=1;
+            while(t>0){
+                s*=f[t%10];
+                t/=10;
+            }
+            if(s>=2) res++;
+        }
+        return res;
+    }
+};
+
+
+
+
+solution2
+
+class Solution {
+public:
+    int rotatedDigits(int N) {
+        int dp[N+1]={0};
+        int res=0;
+        for(int i=0;i<=N;i++){
+            if(i<10){
+              if(i==0||i==1||i==8){
+                dp[i]=1;
+            }
+            else if(i==2||i==5||i==6||i==9){
+                dp[i]=2;
+                res++;
+            }
+            else{
+                dp[i]=0;
+            }  
+            }
+            else{
+                int a=dp[i/10];
+                int b=dp[i%10];
+                if(a==1&&b==1){
+                    dp[i]=1;
+                }
+                else if(a>0&&b>0&&(a>1||b>1)){
+                    dp[i]=2;
+                    res++;
+                }
+                else{
+                    dp[i]=0;
+                }
+            }
+        }
+        return res;
+    }
+};
