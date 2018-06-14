@@ -1,0 +1,53 @@
+solution1
+class Solution {
+public:
+    string mostCommonWord(string paragraph, vector<string>& banned) {
+        unordered_map<string,int> s;
+        for(int i=0;i<paragraph.size();){
+            string t="";
+            while(i<paragraph.size()&&isalpha(paragraph[i])){
+                t.push_back(tolower(paragraph[i]));
+                i++;
+            }
+            s[t]++;
+            while(i<paragraph.size()&&!isalpha(paragraph[i])){
+                i++;
+            }
+        }
+        for(auto x:banned){
+            s[x]=0;
+        }
+        string res="";
+        int count=0;
+        for(auto x:s){
+            if(x.second>count){
+                res=x.first;
+                count=x.second;
+            }
+        }
+        return res;
+    }
+};
+
+
+
+solution2
+class Solution {
+public:
+    string mostCommonWord(string paragraph, vector<string>& banned) {
+        unordered_set<string> ban(banned.begin(),banned.end());
+        unordered_map<string,int> s;
+        for(auto& x:paragraph){
+            x=isalpha(x)?tolower(x):' ';
+        }
+        istringstream iss(paragraph);
+        string w="";
+        pair<string,int> res("",0);
+        while(iss>>w){
+            if(ban.find(w)==ban.end()&&++s[w]>res.second){
+                res=make_pair(w,s[w]);
+            }
+        }
+        return res.first;
+    }
+};
